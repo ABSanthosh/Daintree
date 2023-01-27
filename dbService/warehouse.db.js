@@ -30,3 +30,14 @@ export function deleteWarehouse(id) {
     },
   });
 }
+
+export function fetchWarehouseById(id) {
+  return db.warehouse.findUnique({
+    where: {
+      id,
+    },
+    include: {
+      product: true,
+    }
+  });
+}

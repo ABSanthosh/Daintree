@@ -31,7 +31,7 @@ model Product {
   id          String    @id @unique @default(uuid())
   name        String    @db.VarChar(200)
   description String    @db.VarChar(200)
-  price       Float
+  quantity    Float     @default(0)
   warehouse   Warehouse @relation(fields: [warehouseId], references: [id])
   warehouseId String
 }
