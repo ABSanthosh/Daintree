@@ -1,0 +1,50 @@
+.FancyButton {
+  @include box(auto, 40px);
+  @include make-flex();
+  padding: 0 20px;
+  border: 1px solid transparent;
+  background-color: #15222c;
+  color: white;
+  border-radius: 5px;
+  font-size: 17px;
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+
+  &:hover {
+    color: #15222c;
+    background-color: white;
+    border: 1px solid #15222c;
+    [data-icon] {
+      color: #15222c;
+    }
+  }
+}
+.FancyButton__inverted {
+  @include box(auto, 40px);
+  @include make-flex();
+  padding: 0 20px;
+  border: 1px solid #15222c;
+  border-radius: 5px;
+  font-size: 17px;
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+
+  background-color: white;
+  color: #15222c;
+  border: 1px solid #15222c;
+
+  [data-icon] {
+    color: #15222c;
+  }
+
+  &:hover {
+    color: white;
+    background-color: #15222c;
+    border: 1px solid transparent;
+    [data-icon] {
+      color: white;
+    }
+  }
+}

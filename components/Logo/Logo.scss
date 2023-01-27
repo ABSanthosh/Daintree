@@ -1,0 +1,5 @@
+.Logo {
+  display: inline-block;
+  @include box(auto, 90%);
+  padding: 4px;
+}
