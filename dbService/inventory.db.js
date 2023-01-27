@@ -9,7 +9,6 @@ export function productListByWarehouseId(id) {
 }
 
 export function updateProductQuantity(products) {
-  console.log("products", products);
   const temp = products.map((product) =>
     db.product.update({
       where: {

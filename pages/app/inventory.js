@@ -39,8 +39,6 @@ export default function Inventory({ user, warehouses }) {
   const [deleteSkuList, setDeleteSkuList] = useState([]);
   const [onNewSku, setOnNewSku] = useState(false);
 
-  // console.log("newSkuList", tempWarehouseProducts, warehouseProducts);
-
   return (
     <div className="InventoryPage">
       <div className="InventoryPage__header">
@@ -226,20 +224,19 @@ export default function Inventory({ user, warehouses }) {
                   }
 
                   if (newSkuList.length > 0) {
-                    console.log(selectedWarehouse);
                     await Fetcher("/api/inventory/add-item", {
                       method: "POST",
-                      body: newSkuList.map((i) => {
-                        return {
-                          data: {
+                      body: {
+                        id: selectedWarehouse,
+                        data: newSkuList.map((i) => {
+                          return {
                             name: i.name,
                             quantity: i.quantity,
                             description: "",
                             warehouseId: selectedWarehouse,
-                          },
-                          id: selectedWarehouse,
-                        };
-                      }),
+                          };
+                        }),
+                      },
                     }).then((res) => {
                       if (res.result.count === newSkuList.length) {
                         setNewSkuList([]);
@@ -257,6 +254,56 @@ export default function Inventory({ user, warehouses }) {
           ) : (
             <br />
           )}
+        </div>
+        <div className="InventoryPage__right">
+          <div className="InventoryPage__right--header">
+            <h2>
+              Warehouse{" "}
+              <i>{warehouses.find((i) => i.id === selectedWarehouse)?.name}</i>{" "}
+              Details
+            </h2>
+          </div>
+          <div className="InventoryPage__right--content">
+            <div className="InventoryPage__right--contentItem">
+              <span>Name</span>
+              <h2>
+                {warehouses.find((i) => i.id === selectedWarehouse)?.name}
+              </h2>
+            </div>
+            <div className="InventoryPage__right--contentItem">
+              <span>ID</span>
+              <h2>{warehouses.find((i) => i.id === selectedWarehouse)?.id}</h2>
+            </div>
+            <div className="InventoryPage__right--contentItem">
+              <span>Country</span>
+              <h2>
+                {warehouses
+                  .find((i) => i.id === selectedWarehouse)
+                  ?.country.replaceAll("_", " ")}
+              </h2>
+            </div>
+            <div className="InventoryPage__right--contentItem">
+              <span>Max Quantity</span>
+              <h2>
+                {
+                  warehouses.find((i) => i.id === selectedWarehouse)
+                    ?.maxQuantity
+                }
+              </h2>
+            </div>
+            <div className="InventoryPage__right--contentItem">
+              <span>Created At</span>
+              <h2>
+                {new Date(
+                  warehouses.find((i) => i.id === selectedWarehouse)?.createdAt
+                ).toDateString()}
+              </h2>
+            </div>
+            <div className="InventoryPage__right--contentItem">
+              <span>No. Of Products</span>
+              <h2>{warehouseProducts?.length}</h2>
+            </div>
+          </div>
         </div>
       </div>
     </div>

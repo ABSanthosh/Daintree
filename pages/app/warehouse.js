@@ -22,7 +22,10 @@ export async function getServerSideProps(context) {
   const warehouses = await fetchAllWarehouses();
 
   return {
-    props: { user: context.req.session.user, warehouses },
+    props: {
+      user: context.req.session.user,
+      warehouses: JSON.parse(JSON.stringify(warehouses)),
+    },
   };
 }
 
@@ -36,10 +39,6 @@ export default function WareHouse({ user, warehouses }) {
   });
 
   const [localWarehouses, setLocalWarehouses] = useState(warehouses);
-
-  useEffect(() => {
-    console.log();
-  }, [isEditOpen]);
 
   return (
     <div className="WareHousePage">

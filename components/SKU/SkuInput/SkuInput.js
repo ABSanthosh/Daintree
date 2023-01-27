@@ -38,7 +38,6 @@ function SkuInput({
         placeholder="Quantity"
         disabled={changeType() === "delete"}
         onChange={(e) => {
-          console.log(sku);
           onQuantityChange({
             ...sku,
             quantity: e.target.value !== "" ? parseInt(e.target.value) : 0,

@@ -32,7 +32,7 @@ model Product {
   name        String    @db.VarChar(200)
   description String    @db.VarChar(200)
   quantity    Float     @default(0)
-  warehouse   Warehouse @relation(fields: [warehouseId], references: [id])
+  warehouse   Warehouse @relation(fields: [warehouseId], references: [id], onDelete: Cascade)
   warehouseId String
 }
 
