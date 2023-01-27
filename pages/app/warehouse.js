@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import MenuPane from "../../components/MenuPane/MenuPane";
 import Sidebar from "../../components/Sidebar/Sidebar";
 import "../../styles/routes/App/warehouse.scss";
@@ -28,7 +28,7 @@ export async function getServerSideProps(context) {
 
 export default function WareHouse({ user, warehouses }) {
   const [isAddOpen, setIsAddOpen] = useState(false);
-  const [isEditOpen, setIsEditOpen] = useState(false);
+  const [isEditOpen, setIsEditOpen] = useState(null);
   const [newWarehouse, setNewWarehouse] = useState({
     name: "",
     country: "",
@@ -36,6 +36,10 @@ export default function WareHouse({ user, warehouses }) {
   });
 
   const [localWarehouses, setLocalWarehouses] = useState(warehouses);
+
+  useEffect(() => {
+    console.log();
+  }, [isEditOpen]);
 
   return (
     <div className="WareHousePage">
@@ -53,25 +57,6 @@ export default function WareHouse({ user, warehouses }) {
             >
               Add Warehouse
             </button>
-          </li>
-          <li className="WareHousePage__list--item">
-            <button
-              onClick={() => {
-                setIsEditOpen(!isEditOpen);
-              }}
-            >
-              Edit Warehouse
-            </button>
-            <MenuPane
-              isOpen={isEditOpen}
-              setIsOpen={() => setIsEditOpen(!isEditOpen)}
-            >
-              <div className="EditWarehouse">
-                <h1>Edit Warehouse</h1>
-                <div className="EditWarehouse__content"></div>
-                <div className="EditWarehouse__bottom"></div>
-              </div>
-            </MenuPane>
           </li>
         </ul>
 
@@ -150,14 +135,140 @@ export default function WareHouse({ user, warehouses }) {
             </div>
           </div>
         </MenuPane>
+
+        <MenuPane
+          isOpen={isEditOpen !== null}
+          setIsOpen={() => setIsEditOpen(null)}
+        >
+          <div className="EditWarehouse">
+            <h1>Edit Warehouse</h1>
+            <div className="EditWarehouse__content">
+              <div className="AddWarehouse__row">
+                <label htmlFor="name">Name</label>
+                <FancyInput
+                  value={newWarehouse.name}
+                  onChange={(e) =>
+                    setNewWarehouse({
+                      ...newWarehouse,
+                      name: e,
+                    })
+                  }
+                  placeholder="Warehouse Name"
+                />
+              </div>
+              <div className="EditWarehouse__row">
+                <label htmlFor="name">Country</label>
+                <Select
+                  styles={{
+                    container: (provided) => ({
+                      ...provided,
+                      width: "100%",
+                    }),
+                  }}
+                  defaultValue={{
+                    value: newWarehouse.country,
+                    label: newWarehouse.country.replaceAll("_", " "),
+                  }}
+                  options={Countries.map((country) => {
+                    return {
+                      value: country,
+                      label: country.replaceAll("_", " "),
+                    };
+                  })}
+                  onChange={(e) =>
+                    setNewWarehouse({
+                      ...newWarehouse,
+                      country: e.value,
+                    })
+                  }
+                />
+              </div>
+              <div className="AddWarehouse__row">
+                <label htmlFor="maxQuantity">Maximum Quantity</label>
+                <FancyInput
+                  type="number"
+                  value={newWarehouse.maxQuantity}
+                  onChange={(e) =>
+                    setNewWarehouse({
+                      ...newWarehouse,
+                      maxQuantity: parseInt(e),
+                    })
+                  }
+                  placeholder="Maximum Quantity"
+                />
+              </div>
+            </div>
+            <div className="EditWarehouse__bottom">
+              <FancyButton
+                style={{
+                  width: "100%",
+                }}
+                onClick={async () => {
+                  await Fetcher("/api/warehouse/update-warehouse", {
+                    method: "POST",
+                    body: { ...newWarehouse, id: isEditOpen },
+                  }).then((res) => {
+                    if (res.status === 200) {
+                      setIsEditOpen(null);
+                      setLocalWarehouses(res.warehouse);
+                    }
+                  });
+                }}
+              >
+                Update Warehouse
+              </FancyButton>
+            </div>
+          </div>
+        </MenuPane>
       </div>
       <div className="WareHousePage__body">
         {localWarehouses.map((warehouse, index) => {
           return (
             <div className="WareHousePage__body--item" key={index}>
               <h1>{warehouse.name}</h1>
-              <p>{warehouse.country}</p>
-              <p>{warehouse.maxQuantity}</p>
+              <p>{warehouse.country.replaceAll("_", " ")}</p>
+              <p>Max: {warehouse.maxQuantity}</p>
+              <div className="WareHousePage__body--column">
+                <FancyButton
+                  invertButton
+                  style={{
+                    height: "30px",
+                    width: "100%",
+                  }}
+                  onClick={async () => {
+                    if (
+                      confirm("Are you sure you want to delete this warehouse?")
+                    ) {
+                      await Fetcher("/api/warehouse/delete-warehouse", {
+                        method: "POST",
+                        body: { id: warehouse.id },
+                      }).then((res) => {
+                        if (res.status === 200) {
+                          setLocalWarehouses(res.warehouse);
+                        }
+                      });
+                    }
+                  }}
+                >
+                  Delete
+                </FancyButton>
+                <FancyButton
+                  style={{
+                    height: "30px",
+                    width: "100%",
+                  }}
+                  onClick={() => {
+                    setIsEditOpen(warehouse.id);
+                    setNewWarehouse({
+                      name: warehouse.name,
+                      country: warehouse.country,
+                      maxQuantity: warehouse.maxQuantity,
+                    });
+                  }}
+                >
+                  Edit
+                </FancyButton>
+              </div>
             </div>
           );
         })}

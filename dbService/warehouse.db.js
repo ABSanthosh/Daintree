@@ -22,3 +22,11 @@ export function updateWarehouse(warehouse) {
     },
   });
 }
+
+export function deleteWarehouse(id) {
+  return db.warehouse.delete({
+    where: {
+      id,
+    },
+  });
+}
