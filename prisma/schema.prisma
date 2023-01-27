@@ -8,9 +8,197 @@ datasource db {
 }
 
 model User {
-  sub     String @id @unique
-  email   String @unique
-  name    String @db.VarChar(100)
-  picture String @default("")
-  locale  String @default("")
+  sub       String      @id @unique
+  email     String      @unique
+  name      String      @db.VarChar(100)
+  picture   String      @default("")
+  locale    String      @default("")
+  Warehouse Warehouse[]
+}
+
+model Warehouse {
+  id      String    @id @unique @default(uuid())
+  name    String    @db.VarChar(200)
+  country Countries
+  userId  String
+  User    User      @relation(fields: [userId], references: [sub])
+  Product Product[]
+}
+
+model Product {
+  id          String    @id @unique @default(uuid())
+  name        String    @db.VarChar(200)
+  description String    @db.VarChar(200)
+  price       Float
+  warehouse   Warehouse @relation(fields: [warehouseId], references: [id])
+  warehouseId String
+}
+
+enum Countries {
+  Albania
+  Algeria
+  Andorra
+  Anguilla
+  Antigua_and_Barbuda
+  Argentina
+  Armenia
+  Aruba
+  Australia
+  Austria
+  Azerbaijan
+  Bahamas
+  Bahrain
+  Bangladesh
+  Barbados
+  Belarus
+  Belgium
+  Belize
+  Benin
+  Bermuda
+  Botswana
+  Brazil
+  Bulgaria
+  Burkina_Faso
+  Burundi
+  Cambodia
+  Cameroon
+  Canada
+  Chile
+  China
+  Colombia
+  Costa_Rica
+  Croatia
+  Cuba
+  Cyprus
+  Denmark
+  Dominica
+  Ecuador
+  Egypt
+  El_Salvador
+  Estonia
+  Ethiopia
+  Fiji
+  Finland
+  France
+  French_Polynesia
+  Gabon
+  Gambia
+  Georgia
+  Germany
+  Ghana
+  Greece
+  Greenland
+  Grenada
+  Guadeloupe
+  Guatemala
+  Guinea
+  Guyana
+  Honduras
+  Hungary
+  Iceland
+  Indonesia
+  Iran
+  Iraq
+  Ireland
+  Israel
+  Italy
+  Jamaica
+  Japan
+  Jordan
+  Kazakhstan
+  Kenya
+  Kuwait
+  Kyrgyzstan
+  Latvia
+  Angola
+  Bhutan
+  Comoros
+  Eritrea
+  Djibouti
+  French_Guiana
+  Guinea_Bissau
+  Haiti
+  Lebanon
+  Lesotho
+  Lithuania
+  Luxembourg
+  Madagascar
+  Malawi
+  Malaysia
+  Maldives
+  Mali
+  Malta
+  Martinique
+  Mauritius
+  Mayotte
+  Mexico
+  Mongolia
+  Montenegro
+  Montserrat
+  Morocco
+  Mozambique
+  Namibia
+  Nepal
+  Netherlands
+  New_Caledonia
+  New_Zealand
+  Nicaragua
+  Niger
+  Nigeria
+  Norway
+  Oman
+  Pakistan
+  Palau
+  Panama
+  Papua_New_Guinea
+  Paraguay
+  Peru
+  Philippines
+  Poland
+  Portugal
+  Qatar
+  Romania
+  Rwanda
+  Saint_Kitts_and_Nevis
+  Saint_Lucia
+  Saint_Vincent_and_the_Grenadines
+  Samoa
+  Saudi_Arabia
+  Senegal
+  Serbia
+  Seychelles
+  Sierra_Leone
+  Singapore
+  Slovakia
+  Slovenia
+  South_Africa
+  Spain
+  Sri_Lanka
+  Sudan
+  Suriname
+  Swaziland
+  Sweden
+  Switzerland
+  Syria
+  Thailand
+  Timor_Leste
+  Togo
+  Tonga
+  Trinidad_and_Tobago
+  Tunisia
+  Turkey
+  Uganda
+  Ukraine
+  United_Arab_Emirates
+  United_Kingdom
+  Uruguay
+  Vanuatu
+  Venezuela
+  Yemen
+  Zambia
+  Zimbabwe
+  Afghanistan
+  Kiribati
+  Mauritania
+  Libya
 }

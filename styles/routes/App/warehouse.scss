@@ -1,0 +1,48 @@
+.WareHousePage {
+  &__header {
+    @include box(100%, 138px);
+    padding: 0 24px;
+    @include make-flex($align: flex-start, $just: flex-end);
+    gap: 20px;
+    h1 {
+      font-size: 32px;
+      font-weight: 500;
+    }
+  }
+
+  &__list {
+    @include box(100%, auto);
+    @include make-flex($dir: row, $just: flex-start);
+    list-style: none;
+    gap: 10px;
+
+    &--item {
+      &:first-child {
+        button {
+          border-bottom: 2px solid rgb(52, 200, 39);
+        }
+      }
+
+      button {
+        outline: none;
+        border: none;
+
+        font-size: 20px;
+        background-color: transparent;
+        padding: 10px 10px 5px 10px;
+        cursor: pointer;
+
+        &:hover {
+          color: rgb(52, 200, 39);
+        }
+      }
+    }
+  }
+}
+
+.AddWarehouse,
+.EditWarehouse {
+  @include box();
+  @include make-flex($just: flex-start);
+  padding: 20px;
+}

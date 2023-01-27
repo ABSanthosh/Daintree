@@ -1,0 +1,92 @@
+.Sidebar {
+  background-color: #000000;
+  @include box(68px);
+  transition: width 0.3s ease-in-out;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+
+  &--open {
+    @include box(256px);
+
+    ul li a {
+      p {
+        visibility: visible;
+      }
+    }
+  }
+
+  &__options {
+    @include box($height: auto);
+    padding: 15px 10px 10px;
+    list-style: none;
+    text-decoration: none;
+    @include make-flex();
+    flex-grow: 1;
+    gap: 8px;
+
+    &--item,
+    &--activeItem {
+      color: white;
+      @include box($height: 46px);
+      @include make-flex();
+      border-radius: 4px;
+
+      a {
+        @include box();
+        border-radius: inherit;
+        @include make-flex($dir: row);
+        span {
+          font-size: 32px;
+        }
+        padding: 10px;
+        @include make-flex($dir: row, $just: flex-start);
+        gap: 13px;
+
+        p {
+          visibility: hidden;
+          white-space: nowrap;
+          transition: visibility 0.3s ease-in-out;
+        }
+
+        &:hover {
+          background-color: #2f2f2f;
+        }
+      }
+
+      button {
+        @include box();
+        @include make-flex();
+        background-color: transparent;
+        border: none;
+        border-radius: 4px;
+
+        cursor: pointer;
+        font-size: 32px;
+        &:hover {
+          background-color: #2f2f2f;
+        }
+      }
+      &:last-child {
+        margin-top: auto;
+      }
+    }
+
+    &--activeItem {
+      background-color: #2f2f2f;
+    }
+  }
+
+  &__toggle {
+    &::before {
+      transition: transform 0.3s;
+    }
+    &--active {
+      align-items: flex-end !important;
+      padding-right: 10px;
+      &::before {
+        transform: rotate(180deg);
+      }
+    }
+  }
+}

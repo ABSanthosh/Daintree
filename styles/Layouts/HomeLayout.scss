@@ -1,0 +1,7 @@
+.Layout {
+  @include box();
+
+  display: grid;
+  grid-template-columns: min-content 1fr;
+  grid-template-areas: "sidebar content";
+}
