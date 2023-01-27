@@ -1,9 +1,9 @@
 .FancyInput {
-  @include box(100%, 35px);
+  @include box(100%, 38px);
   border-radius: 4px;
-  color: #b0b6bb;
+  color: #474747;
   background-color: #ffffff;
-  border: 1.5px solid #dddddd;
+  border: 1px solid hsl(0, 0%, 80%);
   font-family: "Lato", sans-serif;
   font-size: 15px;
   padding: 6px 10px;

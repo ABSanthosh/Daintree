@@ -17,12 +17,14 @@ model User {
 }
 
 model Warehouse {
-  id      String    @id @unique @default(uuid())
-  name    String    @db.VarChar(200)
-  country Countries
-  userId  String
-  User    User      @relation(fields: [userId], references: [sub])
-  Product Product[]
+  id          String    @id @unique @default(uuid())
+  name        String    @db.VarChar(200)
+  country     Countries
+  maxQuantity Int
+  userId      String
+  User        User      @relation(fields: [userId], references: [sub])
+  createdAt   DateTime  @default(now())
+  Product     Product[]
 }
 
 model Product {

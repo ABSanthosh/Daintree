@@ -9,11 +9,12 @@
 }
 
 .MenuPane {
-  @include box(500px, 100%);
+  @include box(350px, 100%);
   background-color: white;
   border-left: 2px solid #93b8e9;
   position: relative;
 
+  overflow-y: auto;
   &--close {
     position: absolute;
     top: 8px;
@@ -29,4 +30,3 @@
     }
   }
 }
-

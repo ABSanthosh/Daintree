@@ -1,12 +1,12 @@
 import React from "react";
 import "./MenuPane.scss";
 
-function MenuPane({ isOpen, setIsOpen, children }) {
+function MenuPane({ isOpen, setIsOpen, children, style }) {
   return (
     <>
       {isOpen && (
         <div className="MenuPaneWrapper">
-          <div className="MenuPane">
+          <div className="MenuPane" style={style}>
             <button
               onClick={() => setIsOpen(!isOpen)}
               className="MenuPane--close dark"

@@ -45,4 +45,22 @@
   @include box();
   @include make-flex($just: flex-start);
   padding: 20px;
+
+  &__content {
+    @include box();
+    @include make-flex($just: flex-start);
+    padding-top: 70px;
+  }
+
+  &__row {
+    @include box(100%, auto);
+    @include make-flex($align: flex-start);
+    gap: 10px;
+    padding: 10px 0;
+  }
+
+  &__bottom {
+    @include box($height: auto);
+    @include make-flex();
+  }
 }
