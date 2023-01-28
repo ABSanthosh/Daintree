@@ -12,17 +12,16 @@ function FancyButton({
 }) {
   if (isLink) {
     return (
-      <Link href={href} legacyBehavior>
-        <a
-          className={`${
-            invertButton ? "FancyButton__inverted" : "FancyButton"
-          } ${className}`}
-          ref={innerRef}
-          {...props}
-        >
-          {children}
-        </a>
-      </Link>
+      <a
+        href={href}
+        className={`${
+          invertButton ? "FancyButton__inverted" : "FancyButton"
+        } ${className}`}
+        ref={innerRef}
+        {...props}
+      >
+        {children}
+      </a>
     );
   }
 
