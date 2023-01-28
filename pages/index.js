@@ -4,7 +4,6 @@ import { useRouter } from "next/router";
 import useAuth from "../hooks/useAuth";
 import Header from "../components/Header/Header";
 import FancyButton from "../components/FancyButton/FancyButton";
-import Footer from "../components/Footer/Footer";
 
 export async function getServerSideProps(context) {
   if (context.req.session.user === undefined) {
@@ -51,7 +50,6 @@ export default function Home({ user }) {
           <img className="HeroSection__right--heroImage" src="/Img/hero.svg" />
         </div>
       </section>
-      <Footer />
     </div>
   );
 }
