@@ -1,7 +1,11 @@
 import db from "../lib/prisma";
 
-export function fetchAllWarehouses() {
-  return db.warehouse.findMany();
+export function fetchAllWarehouses(id) {
+  return db.warehouse.findMany({
+    where:{
+      userId: id
+    }
+  });
 }
 
 export function addNewWarehouse(data) {

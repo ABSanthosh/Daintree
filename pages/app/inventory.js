@@ -18,7 +18,7 @@ export async function getServerSideProps(context) {
     };
   }
 
-  const warehouses = await fetchAllWarehouses();
+  const warehouses = await fetchAllWarehouses(context.req.session.user.sub);
 
   return {
     props: {

@@ -19,7 +19,7 @@ export async function getServerSideProps(context) {
     };
   }
 
-  const warehouses = await fetchAllWarehouses();
+  const warehouses = await fetchAllWarehouses(context.req.session.user.sub);
 
   return {
     props: {
@@ -205,7 +205,7 @@ export default function WareHouse({ user, warehouses }) {
                 onClick={async () => {
                   await Fetcher("/api/warehouse/update-warehouse", {
                     method: "POST",
-                    body: { ...newWarehouse, id: isEditOpen },
+                    body: { ...newWarehouse, id: isEditOpen, userId: user.sub },
                   }).then((res) => {
                     if (res.status === 200) {
                       setIsEditOpen(null);
@@ -240,7 +240,7 @@ export default function WareHouse({ user, warehouses }) {
                     ) {
                       await Fetcher("/api/warehouse/delete-warehouse", {
                         method: "POST",
-                        body: { id: warehouse.id },
+                        body: { id: warehouse.id, userId: user.sub },
                       }).then((res) => {
                         if (res.status === 200) {
                           setLocalWarehouses(res.warehouse);
