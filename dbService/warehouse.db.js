@@ -2,9 +2,9 @@ import db from "../lib/prisma";
 
 export function fetchAllWarehouses(id) {
   return db.warehouse.findMany({
-    where:{
-      userId: id
-    }
+    where: {
+      userId: id,
+    },
   });
 }
 
@@ -42,6 +42,14 @@ export function fetchWarehouseById(id) {
     },
     include: {
       product: true,
-    }
+    },
+  });
+}
+
+export function fetchWarehouseByBusinessId(id) {
+  return db.warehouse.findMany({
+    where: {
+      userId: id,
+    },
   });
 }

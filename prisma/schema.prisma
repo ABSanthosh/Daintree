@@ -14,6 +14,7 @@ model User {
   picture   String      @default("")
   locale    String      @default("")
   Warehouse Warehouse[]
+  Order     Order[]
 }
 
 model Warehouse {
@@ -34,6 +35,35 @@ model Product {
   quantity    Float     @default(0)
   warehouse   Warehouse @relation(fields: [warehouseId], references: [id], onDelete: Cascade)
   warehouseId String
+
+  OrderItem OrderItem[]
+}
+
+model Order {
+  id              String      @id @unique
+  userId          String
+  User            User        @relation(fields: [userId], references: [sub])
+  description     String      @db.VarChar(200)
+  fromWarehouseId String
+  toWarehouseId   String
+  orderStatus     OrderStatus @default(pending)
+  OrderItems      OrderItem[]
+}
+
+model OrderItem {
+  id        String  @id @unique @default(uuid())
+  orderId   String
+  Order     Order   @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  productId String
+  Product   Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+  quantity  Float
+}
+
+enum OrderStatus {
+  pending
+  InProgress
+  received
+  rejected
 }
 
 enum Countries {

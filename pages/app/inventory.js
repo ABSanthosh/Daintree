@@ -171,6 +171,7 @@ export default function Inventory({ user, warehouses }) {
                   setTempWarehouseProducts([...warehouseProducts]);
                   setUpdatedSkuList([]);
                   setDeleteSkuList([]);
+                  setNewSkuList([]);
                 }}
                 className="InventoryPage__actions--addSku"
               >
