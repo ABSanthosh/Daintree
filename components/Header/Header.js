@@ -47,13 +47,12 @@ function Header({ currentItem }) {
             />
           ) : (
             <>
-              <Link href="/app/dashboard" legacyBehavior>
-                <a
-                  className="Header__actions--button dark"
-                  data-icon={String.fromCharCode(59505)}
-                  title="Cart"
-                />
-              </Link>
+              <Link
+                href="/app/dashboard"
+                className="Header__actions--button dark"
+                data-icon={String.fromCharCode(59505)}
+                title="Cart"
+              />
               <button
                 className="Header__actions--button dark"
                 data-icon={String.fromCharCode(59834)}
