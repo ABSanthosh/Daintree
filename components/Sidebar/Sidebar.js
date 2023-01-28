@@ -12,19 +12,14 @@ export default function Sidebar({ activePage }) {
 
   const sideBarItems = [
     {
-      name: "Dashboard",
-      icon: String.fromCharCode(58712),
-      link: "/app/dashboard",
+      name: "Warehouse",
+      icon: String.fromCharCode(60344),
+      link: "/app/warehouse",
     },
     {
       name: "Inventory",
       icon: String.fromCharCode(57721),
       link: "/app/inventory",
-    },
-    {
-      name: "Warehouse",
-      icon: String.fromCharCode(60344),
-      link: "/app/warehouse",
     },
     {
       name: "Orders",

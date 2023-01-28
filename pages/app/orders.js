@@ -90,9 +90,9 @@ export default function Orders({ user, businesses, orders }) {
             <div className="OrdersPage__OrderCard--content">
               <p>{order.description}</p>
               <div className="OrdersPage__OrderCard--row">
-                <span>{order.fromWarehouseId}</span>
+                <span>{order.fromBusiness}</span>
                 <hr />
-                <span>{order.toWarehouseId}</span>
+                <span>{order.toBusiness}</span>
               </div>
               <div className="OrdersPage__OrderCard--row">
                 <g>~$4000</g>
@@ -348,7 +348,7 @@ export default function Orders({ user, businesses, orders }) {
 Orders.getLayout = function getLayout(page) {
   return (
     <div className="Layout">
-      <Sidebar activePage={4} />
+      <Sidebar activePage={3} />
       {page}
     </div>
   );

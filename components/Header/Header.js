@@ -12,7 +12,7 @@ function Header({ currentItem }) {
   return (
     <div className="HeaderWrapper">
       <div className="Header">
-        <Logo />
+        <Logo isBlack isSmall={false} />
         <ul className="Header__menu">
           <li
             className={`Header__menu--${
@@ -21,13 +21,7 @@ function Header({ currentItem }) {
           >
             <Link href="/">Home</Link>
           </li>
-          <li
-            className={`Header__menu--${
-              currentItem === "categories" ? "activeItem" : "item"
-            }`}
-          >
-            <Link href="/categories">Categories</Link>
-          </li>
+
           <li
             className={`Header__menu--${
               currentItem === "about" ? "activeItem" : "item"
@@ -53,7 +47,7 @@ function Header({ currentItem }) {
             />
           ) : (
             <>
-              <Link href="/app/dashboard">
+              <Link href="/app/dashboard" legacyBehavior>
                 <a
                   className="Header__actions--button dark"
                   data-icon={String.fromCharCode(59505)}

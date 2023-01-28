@@ -40,14 +40,16 @@ model Product {
 }
 
 model Order {
-  id              String      @id @unique
-  userId          String
-  User            User        @relation(fields: [userId], references: [sub])
-  description     String      @db.VarChar(200)
-  fromWarehouseId String
-  toWarehouseId   String
-  orderStatus     OrderStatus @default(pending)
-  OrderItems      OrderItem[]
+  id                    String      @id @unique
+  userId                String
+  User                  User        @relation(fields: [userId], references: [sub])
+  description           String      @db.VarChar(200)
+  fromBusiness          String
+  fromBusinessWarehouse String
+  toBusiness            String
+  toBusinessWarehouse   String
+  orderStatus           OrderStatus @default(pending)
+  OrderItems            OrderItem[]
 }
 
 model OrderItem {

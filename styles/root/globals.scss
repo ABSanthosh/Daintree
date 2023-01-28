@@ -46,6 +46,7 @@ a {
 html,
 body {
   @include box(100vw, 100vh);
+  overflow-x: hidden;
 }
 
 #__next {

@@ -14,8 +14,10 @@ export async function placeOrder(data) {
       id: data.id,
       userId: data.userId,
       description: data.description,
-      fromWarehouseId: data.fromBusiness,
-      toWarehouseId: data.toBusiness,
+      fromBusiness: data.fromBusiness,
+      fromBusinessWarehouse: data.fromBusinessWarehouse,
+      toBusiness: data.toBusiness,
+      toBusinessWarehouse: data.toBusinessWarehouse,
     },
   });
 

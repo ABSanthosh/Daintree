@@ -48,6 +48,8 @@
     gap: 10px;
     @include make-flex($just: flex-start, $align: flex-start, $dir: row);
     padding: 24px;
+    flex-wrap: wrap;
+    align-content: flex-start;
   }
 
   &__OrderCard {

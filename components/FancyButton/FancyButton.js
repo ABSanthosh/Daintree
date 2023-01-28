@@ -12,7 +12,7 @@ function FancyButton({
 }) {
   if (isLink) {
     return (
-      <Link href={href}>
+      <Link href={href} legacyBehavior>
         <a
           className={`${
             invertButton ? "FancyButton__inverted" : "FancyButton"

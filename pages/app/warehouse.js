@@ -279,7 +279,7 @@ export default function WareHouse({ user, warehouses }) {
 WareHouse.getLayout = function getLayout(page) {
   return (
     <div className="Layout">
-      <Sidebar activePage={3} />
+      <Sidebar activePage={1} />
       {page}
     </div>
   );
