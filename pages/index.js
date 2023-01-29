@@ -102,7 +102,7 @@ export default function Home({ user }) {
               We take great pride in offering the best shipping and
               transportation services available anywhere in the world. utilizing
               software for tracking. processing, and communications, along with
-              our knowledgeable staff's decades of experience!
+              our knowledgeable staff&apos;s decades of experience!
             </p>
             <div className="AboutSection__content--cta">
               <FancyButton
