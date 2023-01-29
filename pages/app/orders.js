@@ -394,8 +394,8 @@ export default function Orders({ user, businesses, orders }) {
                     })
                     .then((res) => {
                       setFetchedQuote({
-                        cost: res.freight_cost,
-                        distance: res.distance,
+                        cost: res.result.freight_cost,
+                        distance: res.result.distance,
                       });
                       setFetchLoadState(false)
                     });
