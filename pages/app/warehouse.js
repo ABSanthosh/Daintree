@@ -84,7 +84,7 @@ export default function WareHouse({ user, warehouses }) {
                       width: "100%",
                     }),
                   }}
-                  options={Countries.map((country) => {
+                  options={Object.keys(Countries).map((country) => {
                     return {
                       value: country,
                       label: country.replaceAll("_", " "),
@@ -168,7 +168,7 @@ export default function WareHouse({ user, warehouses }) {
                     value: newWarehouse.country,
                     label: newWarehouse.country.replaceAll("_", " "),
                   }}
-                  options={Countries.map((country) => {
+                  options={Object.keys(Countries).map((country) => {
                     return {
                       value: country,
                       label: country.replaceAll("_", " "),
