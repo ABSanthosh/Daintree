@@ -1,128 +1,96 @@
 .HomeWrapper {
-  @include box($height: auto);
-  @include make-flex($just: flex-start);
+  @include make-flex($dir: column, $just: flex-start);
+  @include box($height: unset);
+  min-height: 100vh;
+  overflow-y: auto;
   overflow-x: hidden;
+
   .HeroSection {
-    @include box(100vw, 580px);
-    max-width: 1152px;
+    @include box(100vw, 750px);
+    // overflow: hidden;
     position: relative;
-    @include make-flex($dir: row, $just: flex-start);
+    background-color: #f6f6f6;
+    background-image: url(/Img/Hero3.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    @include make-flex($dir: row);
 
-    @include respondAt(1518px) {
-      width: 90vw;
-    }
-
-    @include respondAt(1016px) {
-      // height: 430px;
-      height: 510px;
-    }
-    @include respondAt(840px) {
-      height: auto;
-      min-height: 600px;
-    }
-
-    @include respondAt(915px) {
-      margin-top: 80px;
-    }
-
-    &__left {
-      @include box(50%);
-      @include make-flex();
-      border-radius: 30px 0 0 30px;
+    &__main {
+      @include box($height: calc(100% - 123px));
+      max-width: 1152px;
       position: relative;
-      // gap: 25px;
-
-      @include respondAt(840px) {
-        width: 100%;
-        border-radius: 20px;
-      }
-    }
-    &__right {
-      @include box(50%);
-      @include make-flex();
-      mix-blend-mode: exclusion;
-      position: absolute;
-      right: 0px;
-      z-index: -1;
-      transform: rotate(180deg);
-      object-fit: cover;
-
-      @include respondAt(840px) {
-        display: none;
+      margin-top: 123px;
+      @include make-flex($just: flex-end, $align: flex-start);
+      gap: 80px;
+      @include respondAt(1518px) {
+        width: 90vw;
       }
 
-      &--heroImage {
-        transform: rotate(180deg);
-        height: 80%;
-        @include respondAt(1016px) {
-          height: 83%;
-        }
-      }
-    }
-
-    &__top {
-      @include make-flex($just: space-around);
-      @include box($height: auto);
-      min-height: 65%;
-
-      // gap: 15%;
       @include respondAt(1016px) {
-        gap: 30px;
-        height: auto;
+        // height: 430px;
+        height: 510px;
       }
-
       @include respondAt(840px) {
-        gap: 40px;
+        height: auto;
+        min-height: 600px;
       }
 
-      &--title {
-        font-size: 60px;
-        color: #404040;
-        font-weight: 700;
+      @include respondAt(915px) {
+        margin-top: 80px;
+      }
 
-        @include respondAt(840px) {
-          text-align: center;
-        }
-        p {
-          font-size: 50px;
-        }
-        span {
-          color: #3eab59;
-          position: relative;
-          &::after {
-            position: absolute;
-            left: 16px;
-            transform: rotate(354deg);
-            bottom: 3px;
+      &--cta {
+        @include box(100%, auto);
+        @include make-flex($dir: row, $just: flex-start);
+        gap: 20px;
+      }
 
-            content: url(/Img/HeroUnderline.png);
-            @include box(100px, 30px);
-          }
+      &--header {
+        h1 {
+          font-family: "Playfair Display", serif;
+          font-size: 60px;
+          color: white;
         }
+      }
+      p {
+        color: #f6f6f6;
+        font-family: "Montserrat", sans-serif;
+      }
+
+      &--top {
+        @include box(100%, auto);
+        @include make-flex($just: space-between, $align: flex-start);
+        gap: 25px;
+      }
+
+      &--bottom {
+        @include box(100%, auto);
+        @include make-flex($dir: row, $just: space-between, $align: flex-start);
+        gap: 25px;
+        margin-bottom: -65px;
+        position: relative;
+        z-index: 1;
       }
     }
 
-    &__bottom {
-      @include make-flex($dir: row, $just: flex-start);
-      @include box(100%, auto);
-      column-gap: 20px;
-      row-gap: 10px;
-      flex-wrap: wrap;
+    &__card {
+      @include box(330px, 130px);
+      background-color: white;
+      border-radius: 1px;
+      box-shadow: 0px 5px 18px 1px rgba(0, 0, 0, 0.24);
+      @include make-flex($dir: row, $just: space-between);
+      padding: 20px;
+      gap: 20px;
 
-      span {
-        @include box(100%, auto);
-        color: #52575a;
+      h3 {
+        font-family: "Montserrat", sans-serif;
+        font-size: 22px;
+        font-weight: 500;
       }
 
-      @include respondAt(840px) {
-        justify-content: center;
-        flex-wrap: wrap;
-      }
-
-      @include respondAt(445px) {
-        a {
-          flex-grow: 1;
-        }
+      img {
+        height: 80%;
       }
     }
   }

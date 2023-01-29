@@ -1,4 +1,3 @@
-import Link from "next/link";
 import "./FancyButton.scss";
 
 function FancyButton({
@@ -8,6 +7,7 @@ function FancyButton({
   href = "",
   innerRef = null,
   invertButton = false,
+  noHover = false,
   ...props
 }) {
   if (isLink) {
@@ -16,7 +16,9 @@ function FancyButton({
         href={href}
         className={`${
           invertButton ? "FancyButton__inverted" : "FancyButton"
-        } ${className}`}
+        } ${className}
+        ${noHover ? "" : "FancyButton--hover"}
+        `}
         ref={innerRef}
         {...props}
       >
@@ -29,7 +31,9 @@ function FancyButton({
     <button
       className={`${
         invertButton ? "FancyButton__inverted" : "FancyButton"
-      } ${className}`}
+      } ${className}
+      ${noHover ? "" : "FancyButton--hover"}
+      `}
       ref={innerRef}
       {...props}
     >

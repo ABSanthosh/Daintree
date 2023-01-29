@@ -30,12 +30,14 @@
     }
   }
 
-  &:hover {
-    color: #15222c;
-    background-color: white;
-    border: 1px solid #15222c;
-    [data-icon] {
+  &--hover {
+    &:hover {
       color: #15222c;
+      background-color: white;
+      border: 1px solid #15222c;
+      [data-icon] {
+        color: #15222c;
+      }
     }
   }
 }
@@ -68,12 +70,14 @@
     }
   }
 
-  &:hover {
-    color: white;
-    background-color: #15222c;
-    border: 1px solid transparent;
-    [data-icon] {
+  &--hover {
+    &:hover {
       color: white;
+      background-color: #15222c;
+      border: 1px solid transparent;
+      [data-icon] {
+        color: white;
+      }
     }
   }
 }

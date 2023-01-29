@@ -27,28 +27,52 @@ export default function Home({ user }) {
     <div className="HomeWrapper">
       <Header currentItem="home" />
       <section className="HeroSection">
-        <div className="HeroSection__left">
-          <div className="HeroSection__top">
-            <h1 className="HeroSection__top--title">
-              <p>
-                Grow you business,
-                <span>we will take care</span> of all your your logistics
-              </p>
-            </h1>
-            <div className="HeroSection__bottom">
+        <main className="HeroSection__main">
+          <div className="HeroSection__main--top">
+            <div className="HeroSection__main--header">
+              <h1>Get ready for a wider</h1>
+              <h1>expansion of your business</h1>
+            </div>
+            <p>Reach more market sectors for powerful business development.</p>
+            <div className="HeroSection__main--cta">
               <FancyButton
-                isLink={true}
-                href="/app/warehouse"
-                style={{ width: "180px" }}
+                noHover={true}
+                style={{
+                  backgroundColor: "#DB5159",
+                  borderRadius: "2px",
+                }}
               >
-                Get Started
+                Start Now
+              </FancyButton>
+              <FancyButton
+                // noHover={true}
+                style={{
+                  backgroundColor: "transparent",
+                  borderRadius: "2px",
+                  color: "white",
+                  borderColor: "white",
+                }}
+                invertButton={true}
+              >
+                Learn More
               </FancyButton>
             </div>
           </div>
-        </div>
-        <div className="HeroSection__right">
-          <img className="HeroSection__right--heroImage" src="/Img/hero.svg" />
-        </div>
+          <div className="HeroSection__main--bottom">
+            <div className="HeroSection__card">
+              <img src="/Img/Icons/openBox.png" />
+              <h3>Manage Warehouse</h3>
+            </div>
+            <div className="HeroSection__card">
+              <img src="/Img/Icons/money.png" />
+              <h3>Predict Freight Costs</h3>
+            </div>
+            <div className="HeroSection__card">
+              <img src="/Img/Icons/quality.png" />
+              <h3>Place Efficient Orders</h3>
+            </div>
+          </div>
+        </main>
       </section>
     </div>
   );

@@ -2,6 +2,13 @@
   @include box(100%, 90px);
   @include make-flex();
   padding: 20px 20px;
+  position: fixed;
+  top: 0;
+  z-index: 1;
+  background: #1e1e1e3a;
+  backdrop-filter: blur(5px);
+  box-shadow: 0 2px 4px rgb(0 0 0 / 2%), inset 0 -1px 0 rgb(0 0 0 / 6%);
+  padding: 0 20px;
 }
 
 .Header {
@@ -10,10 +17,11 @@
   @include make-flex($dir: row, $just: space-between);
 
   &__menu {
+    background-color: white;
     list-style: none;
     @include box(50%, 40px);
     border-radius: 40px;
-    border: 1.5px solid;
+    // border: 1.5px solid;
     @include make-flex($dir: row, $just: space-around, $align: center);
     gap: 10px;
 
@@ -30,6 +38,8 @@
       @include box(auto);
       @include make-flex($dir: row, $align: center);
       gap: 10px;
+      flex-grow: 1;
+
       font-family: "Poppins", sans-serif;
       font-size: 16px;
       cursor: pointer;
@@ -59,7 +69,7 @@
       @include make-flex();
 
       &:hover {
-        background-color: #F6B0FF;
+        background-color: #f6b0ff;
       }
     }
   }

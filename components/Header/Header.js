@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./Header.scss";
 import Logo from "../Logo/Logo";
 import Link from "next/link";
@@ -9,10 +9,23 @@ function Header({ currentItem }) {
   const router = useRouter();
   const { login, logout, user } = useAuth();
 
+  useEffect(() => {
+    window.addEventListener("scroll", () => {
+      if (window.scrollY > 1) {
+        document.querySelector(".HeaderWrapper").style.height = "70px";
+      } else {
+        document.querySelector(".HeaderWrapper").style.height = "";
+      }
+    });
+    return () => {
+      window.removeEventListener("scroll", () => {});
+    };
+  });
+
   return (
     <div className="HeaderWrapper">
       <div className="Header">
-        <Logo isBlack isSmall={false} />
+        <Logo isBlack={false} isSmall={false} />
         <ul className="Header__menu">
           <li
             className={`Header__menu--${
@@ -48,7 +61,7 @@ function Header({ currentItem }) {
           ) : (
             <>
               <Link
-                href="/app/dashboard"
+                href="/app/warehouse"
                 className="Header__actions--button dark"
                 data-icon={String.fromCharCode(59505)}
                 title="Cart"
