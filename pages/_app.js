@@ -13,6 +13,10 @@ function MyApp({ Component, pageProps, user }) {
       <Head>
         <title>Daintree</title>
         <link rel="icon" href="/favicon.ico" />
+        <meta
+          http-equiv="Content-Security-Policy"
+          content="upgrade-insecure-requests"
+        />
       </Head>
       <NextNProgress color="#ff4f46" height={5} />
       {getLayout(<Component {...pageProps} />)}
