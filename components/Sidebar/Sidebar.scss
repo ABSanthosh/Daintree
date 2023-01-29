@@ -8,6 +8,7 @@
 
   &--open {
     @include box(256px);
+    padding-top: 20px;
 
     ul li a {
       p {

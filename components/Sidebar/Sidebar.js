@@ -6,7 +6,7 @@ import useAuth from "../../hooks/useAuth";
 import { useRouter } from "next/router";
 
 export default function Sidebar({ activePage }) {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(true);
   const { user, logout } = useAuth();
   const router = useRouter();
 
