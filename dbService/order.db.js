@@ -9,6 +9,7 @@ export function fetchBusinesses() {
 }
 
 export async function placeOrder(data) {
+  console.log(data.predictedPrice)
   const order = await db.order.create({
     data: {
       id: data.id,
