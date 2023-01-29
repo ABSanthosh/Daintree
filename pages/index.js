@@ -74,6 +74,71 @@ export default function Home({ user }) {
           </div>
         </main>
       </section>
+      <section className="AboutSection">
+        <div className="AboutSection__content">
+          <div className="AboutSection__content--left">
+            <span>Why Daintree?</span>
+            <h1>
+              Why should you choose our services, here are the advantages we
+              offer
+            </h1>
+            <p>
+              We take great pride in offering the best shipping and
+              transportation services available anywhere in the world. utilizing
+              software for tracking. processing, and communications, along with
+              our knowledgeable staff's decades of experience!
+            </p>
+            <div className="AboutSection__content--cta">
+              <FancyButton
+                noHover={true}
+                style={{
+                  backgroundColor: "#DB5159",
+                  borderRadius: "2px",
+                }}
+              >
+                Get a quote now!{" "}
+              </FancyButton>
+            </div>
+          </div>
+          <div className="AboutSection__content--right">
+            <div className="AboutSection__content--rightCard">
+              <div
+                className="AboutSection__content--rightCardLeft dark"
+                data-icon={String.fromCharCode(57761)}
+              />
+              <div className="AboutSection__content--rightCardRight">
+                <h2>Safe Packing</h2>
+                <p>Adhering to global standards</p>
+              </div>
+            </div>
+            <div className="AboutSection__content--rightCard">
+              <div
+                className="AboutSection__content--rightCardLeft dark"
+                data-icon={String.fromCharCode(58715)}
+              />
+              <div className="AboutSection__content--rightCardRight">
+                <h2>Ship Everywhere</h2>
+                <p>
+                  Regulations are frequently congested in global supply chains
+                </p>
+              </div>
+            </div>
+            <div className="AboutSection__content--rightCard">
+              <div
+                className="AboutSection__content--rightCardLeft dark"
+                data-icon={String.fromCharCode(57749)}
+              />
+              <div className="AboutSection__content--rightCardRight">
+                <h2>Fastest Shipping</h2>
+                <p>
+                  International supply chains are subject to stringent
+                  regulations
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
     </div>
   );
 }

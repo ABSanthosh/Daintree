@@ -11,6 +11,7 @@ function Header({ currentItem }) {
 
   useEffect(() => {
     window.addEventListener("scroll", () => {
+      console.log("Header mounted");
       if (window.scrollY > 1) {
         document.querySelector(".HeaderWrapper").style.height = "70px";
       } else {
