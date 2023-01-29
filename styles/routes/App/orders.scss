@@ -44,12 +44,13 @@
     }
   }
   &__body {
-    @include box($height: auto);
+    @include box($height: calc(100vh - 138px));
     gap: 10px;
     @include make-flex($just: flex-start, $align: flex-start, $dir: row);
     padding: 24px;
     flex-wrap: wrap;
     align-content: flex-start;
+    overflow-y: auto;
   }
 
   &__OrderCard {
@@ -175,5 +176,6 @@
   &__bottom {
     @include box($height: auto);
     @include make-flex();
+    gap: 20px;
   }
 }

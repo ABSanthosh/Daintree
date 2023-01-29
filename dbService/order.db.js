@@ -18,6 +18,7 @@ export async function placeOrder(data) {
       fromBusinessWarehouse: data.fromBusinessWarehouse,
       toBusiness: data.toBusiness,
       toBusinessWarehouse: data.toBusinessWarehouse,
+      predictedPrice: data.predictedPrice,
     },
   });
 

@@ -5,6 +5,9 @@ export function productListByWarehouseId(id) {
     where: {
       warehouseId: id,
     },
+    include: {
+      warehouse: true,
+    },
   });
 }
 

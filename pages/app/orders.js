@@ -8,6 +8,8 @@ import { fetchBusinesses, fetchOrders } from "../../dbService/order.db";
 import Select from "react-select";
 import Fetcher from "../../utils/Fetcher";
 import SkuOrderInput from "../../components/SKU/SkuOrderInput/SkuOrderInput";
+import { Cashify } from "../../utils/Cashify";
+import Countries from "../../utils/countries.json";
 
 export async function getServerSideProps(context) {
   if (context.req.session.user === undefined) {
@@ -43,16 +45,19 @@ export default function Orders({ user, businesses, orders }) {
   const [fromBusinessProducts, setFromBusinessProducts] = useState([]);
   const [fromTempBusinessProducts, setFromTempBusinessProducts] = useState([]);
 
+  const [fetchedQuote, setFetchedQuote] = useState(null);
+
   const [newOrderDetails, setNewOrderDetails] = useState({
     id: "",
     description: "",
     fromBusiness: "",
     toBusiness: "",
     selectedProducts: [],
+    predictedPrice: 0,
   });
 
   const [ordersList, setOrdersList] = useState(orders);
-
+  console.log(orders);
   useEffect(() => {
     if (isOrderPaneOpen) {
       setNewOrderDetails({
@@ -61,6 +66,7 @@ export default function Orders({ user, businesses, orders }) {
         fromBusiness: "",
         toBusiness: "",
         selectedProducts: [],
+        predictedPrice: 0,
       });
     }
   }, [isOrderPaneOpen]);
@@ -95,7 +101,9 @@ export default function Orders({ user, businesses, orders }) {
                 <span>{order.toBusiness}</span>
               </div>
               <div className="OrdersPage__OrderCard--row">
-                <g>~$4000</g>
+                <g>
+                  {order.predictedPrice ? Cashify(order.predictedPrice) : "--"}
+                </g>
               </div>
             </div>
           </div>
@@ -303,6 +311,87 @@ export default function Orders({ user, businesses, orders }) {
             </div>
           </div>
           <div className="OrderPane__bottom">
+            {/* {fetchedPrice && ( */}
+            <div
+              className="OrderPane__row"
+              style={{
+                alignItems: "flex-end",
+              }}
+            >
+              <div className="OrderPane__column">
+                <div className="OrderPane__row">
+                  <label htmlFor="total">Total</label>
+                  <h2>{fetchedQuote ? Cashify(fetchedQuote.cost) : "--"}</h2>
+                </div>
+
+                <div className="OrderPane__row">
+                  <label htmlFor="total">Distance</label>
+                  <h2>
+                    {fetchedQuote
+                      ? Math.round(
+                          (fetchedQuote.distance / 1000 + Number.EPSILON) * 100
+                        ) / 100
+                      : "--"}
+                    {" km"}
+                  </h2>
+                </div>
+              </div>
+
+              <div className="OrderPane__row">
+                <FancyButton
+                  style={{
+                    width: "100%",
+                  }}
+                  disabled={
+                    newOrderDetails.selectedProducts.length === 0 ||
+                    !newOrderDetails.fromBusinessWarehouse ||
+                    !newOrderDetails.toBusinessWarehouse
+                  }
+                  onClick={async () => {
+                    const fromCountry = fromBusinessWarehouse.find(
+                      (warehouse) =>
+                        warehouse.id === newOrderDetails.fromBusinessWarehouse
+                    ).country;
+                    const toCountry = toBusinessWarehouse.find(
+                      (warehouse) =>
+                        warehouse.id === newOrderDetails.toBusinessWarehouse
+                    ).country;
+                    const quoteData = {
+                      origin: [
+                        Countries[fromCountry].lat,
+                        Countries[fromCountry].lng,
+                      ],
+                      destination: [
+                        Countries[toCountry].lat,
+                        Countries[toCountry].lng,
+                      ],
+                      noOfUnits: newOrderDetails.selectedProducts.reduce(
+                        (acc, curr) => {
+                          return acc + curr.quantity;
+                        },
+                        0
+                      ),
+                      volume: newOrderDetails.selectedProducts.length * 10,
+                    };
+
+                    await Fetcher(
+                      `http://34.131.53.208/predict?quantity=${quoteData.noOfUnits}&volume=${quoteData.volume}&lat1=${quoteData.origin[0]}&lng1=${quoteData.origin[1]}&lat2=${quoteData.destination[0]}&lng2=${quoteData.destination[1]}`,
+                      {
+                        method: "GET",
+                      }
+                    ).then((res) => {
+                      setFetchedQuote({
+                        cost: res.freight_cost,
+                        distance: res.distance,
+                      });
+                    });
+                  }}
+                >
+                  Get a quote now!
+                </FancyButton>
+              </div>
+            </div>
+            {/* )} */}
             <FancyButton
               style={{
                 width: "100%",
@@ -311,7 +400,11 @@ export default function Orders({ user, businesses, orders }) {
                 await Fetcher("/api/order/place-order", {
                   method: "POST",
                   body: {
-                    data: { ...newOrderDetails, userId: user.sub },
+                    data: {
+                      ...newOrderDetails,
+                      userId: user.sub,
+                      predictedPrice: fetchedQuote.cost,
+                    },
                     id: user.sub,
                   },
                 }).then((res) => {
@@ -323,6 +416,7 @@ export default function Orders({ user, businesses, orders }) {
                       toBusiness: "",
                       toBusinessWarehouse: "",
                       selectedProducts: [],
+                      predictedPrice: 0,
                     });
                     setFromBusinessWarehouse([]);
                     setToBusinessWarehouse([]);
@@ -331,10 +425,14 @@ export default function Orders({ user, businesses, orders }) {
 
                     setOrdersList([...res.orders]);
                     setIsOrderPaneOpen(false);
+                    setFetchedQuote(null);
                   }
                 });
               }}
-              disabled={newOrderDetails.selectedProducts.length === 0}
+              disabled={
+                newOrderDetails.selectedProducts.length === 0 ||
+                fetchedQuote === null
+              }
             >
               Place Order
             </FancyButton>

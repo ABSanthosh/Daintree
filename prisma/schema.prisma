@@ -55,6 +55,8 @@ model Order {
   toBusinessWarehouse   String
   orderStatus           OrderStatus @default(pending)
   OrderItems            OrderItem[]
+  predictedPrice        Float       @default(0)
+  finalPrice            Float       @default(0)
 
   @@index([userId])
 }
@@ -79,170 +81,232 @@ enum OrderStatus {
 }
 
 enum Countries {
-  Albania
-  Algeria
   Andorra
-  Anguilla
+  United_Arab_Emirates
+  Afghanistan
   Antigua_and_Barbuda
-  Argentina
+  Anguilla
+  Albania
   Armenia
-  Aruba
-  Australia
+  Angola
+  Antarctica
+  Argentina
+  American_Samoa
   Austria
+  Australia
+  Aruba
   Azerbaijan
-  Bahamas
-  Bahrain
-  Bangladesh
   Barbados
-  Belarus
+  Bangladesh
   Belgium
-  Belize
+  Burkina_Faso
+  Bulgaria
+  Bahrain
+  Burundi
   Benin
   Bermuda
-  Botswana
+  Brunei
+  Bolivia
   Brazil
-  Bulgaria
-  Burkina_Faso
-  Burundi
-  Cambodia
-  Cameroon
+  Bahamas
+  Bhutan
+  Bouvet_Island
+  Botswana
+  Belarus
+  Belize
   Canada
+  Central_African_Republic
+  Switzerland
+  Cook_Islands
   Chile
+  Cameroon
   China
   Colombia
   Costa_Rica
-  Croatia
   Cuba
+  Cape_Verde
+  Christmas_Island
   Cyprus
+  Czech_Republic
+  Germany
+  Djibouti
   Denmark
   Dominica
+  Dominican_Republic
+  Algeria
   Ecuador
-  Egypt
-  El_Salvador
   Estonia
+  Egypt
+  Western_Sahara
+  Eritrea
+  Spain
   Ethiopia
-  Fiji
   Finland
+  Fiji
+  Micronesia
+  Faroe_Islands
   France
-  French_Polynesia
   Gabon
-  Gambia
-  Georgia
-  Germany
-  Ghana
-  Greece
-  Greenland
+  United_Kingdom
   Grenada
-  Guadeloupe
-  Guatemala
+  Georgia
+  French_Guiana
+  Guernsey
+  Ghana
+  Gibraltar
+  Greenland
+  Gambia
   Guinea
+  Guadeloupe
+  Equatorial_Guinea
+  Greece
+  Guatemala
+  Guam
   Guyana
+  Gaza_Strip
+  Hong_Kong
   Honduras
+  Croatia
+  Haiti
   Hungary
-  Iceland
   Indonesia
-  Iran
-  Iraq
   Ireland
   Israel
+  Isle_of_Man
+  India
+  Iraq
+  Iran
+  Iceland
   Italy
+  Jersey
   Jamaica
-  Japan
   Jordan
-  Kazakhstan
+  Japan
   Kenya
-  Kuwait
   Kyrgyzstan
-  Latvia
-  Angola
-  Bhutan
+  Cambodia
+  Kiribati
   Comoros
-  Eritrea
-  Djibouti
-  French_Guiana
-  Guinea_Bissau
-  Haiti
+  Saint_Kitts_and_Nevis
+  North_Korea
+  South_Korea
+  Kuwait
+  Cayman_Islands
+  Kazakhstan
+  Laos
   Lebanon
+  Saint_Lucia
+  Liechtenstein
+  Sri_Lanka
+  Liberia
   Lesotho
   Lithuania
   Luxembourg
-  Madagascar
-  Malawi
-  Malaysia
-  Maldives
-  Mali
-  Malta
-  Martinique
-  Mauritius
-  Mayotte
-  Mexico
-  Mongolia
-  Montenegro
-  Montserrat
+  Latvia
+  Libya
   Morocco
+  Monaco
+  Moldova
+  Montenegro
+  Madagascar
+  Marshall_Islands
+  Macedonia
+  Mali
+  Myanmar
+  Mongolia
+  Macau
+  Northern_Mariana_Islands
+  Martinique
+  Mauritania
+  Montserrat
+  Malta
+  Mauritius
+  Maldives
+  Malawi
+  Mexico
+  Malaysia
   Mozambique
   Namibia
-  Nepal
-  Netherlands
   New_Caledonia
-  New_Zealand
-  Nicaragua
   Niger
+  Norfolk_Island
   Nigeria
+  Nicaragua
   Norway
+  Nepal
+  Nauru
+  Niue
+  New_Zealand
   Oman
-  Pakistan
-  Palau
   Panama
-  Papua_New_Guinea
-  Paraguay
   Peru
+  French_Polynesia
+  Papua_New_Guinea
   Philippines
+  Pakistan
   Poland
+  Saint_Pierre_and_Miquelon
+  Pitcairn_Islands
+  Puerto_Rico
+  Palestinian_Territories
   Portugal
+  Palau
+  Paraguay
   Qatar
   Romania
-  Rwanda
-  Saint_Kitts_and_Nevis
-  Saint_Lucia
-  Saint_Vincent_and_the_Grenadines
-  Samoa
-  Saudi_Arabia
-  Senegal
   Serbia
+  Russia
+  Rwanda
+  Saudi_Arabia
+  Solomon_Islands
   Seychelles
-  Sierra_Leone
-  Singapore
-  Slovakia
-  Slovenia
-  South_Africa
-  Spain
-  Sri_Lanka
   Sudan
-  Suriname
-  Swaziland
   Sweden
-  Switzerland
+  Singapore
+  Saint_Helena
+  Slovenia
+  Svalbard_and_Jan_Mayen
+  Slovakia
+  Sierra_Leone
+  San_Marino
+  Senegal
+  Somalia
+  Suriname
+  El_Salvador
   Syria
-  Thailand
-  Timor_Leste
+  Swaziland
+  Turks_and_Caicos_Islands
+  Chad
+  French_Southern_Territories
   Togo
-  Tonga
-  Trinidad_and_Tobago
+  Thailand
+  Tajikistan
+  Tokelau
+  Turkmenistan
   Tunisia
+  Tonga
   Turkey
-  Uganda
+  Trinidad_and_Tobago
+  Tuvalu
+  Taiwan
+  Tanzania
   Ukraine
-  United_Arab_Emirates
-  United_Kingdom
+  Uganda
+  United_States
   Uruguay
-  Vanuatu
+  Uzbekistan
+  Vatican_City
   Venezuela
+  British_Virgin_Islands
+  U_S_Virgin_Islands
+  Vietnam
+  Vanuatu
+  Wallis_and_Futuna
+  Samoa
+  Kosovo
   Yemen
+  Mayotte
+  South_Africa
   Zambia
   Zimbabwe
-  Afghanistan
-  Kiribati
-  Mauritania
-  Libya
 }
