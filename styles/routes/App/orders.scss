@@ -129,6 +129,7 @@
   @include box();
   @include make-flex($just: flex-start);
   padding: 20px;
+  position: relative;
 
   &__content {
     @include box();

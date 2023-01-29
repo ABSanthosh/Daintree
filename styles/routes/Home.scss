@@ -233,6 +233,7 @@
           padding: 20px;
           @include make-flex($just: flex-start);
           gap: 20px;
+          position: relative;
 
           &__column {
             @include box(100%, auto);

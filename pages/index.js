@@ -11,6 +11,7 @@ import { useState } from "react";
 import Countries from "../utils/countries.json";
 import Fetcher from "../utils/Fetcher";
 import { Cashify } from "../utils/Cashify";
+import BlurredSpinner from "../components/BlurredSpinner/BlurredSpinner";
 
 export async function getServerSideProps(context) {
   if (context.req.session.user === undefined) {
@@ -29,6 +30,7 @@ export async function getServerSideProps(context) {
 export default function Home({ user }) {
   const router = useRouter();
   const { login } = useAuth();
+  const [loaderState, setLoaderState] = useState(false);
 
   const [quoteData, setQuoteData] = useState({
     origin: "",
@@ -159,9 +161,10 @@ export default function Home({ user }) {
         <div className="QuoteSection__content">
           <div className="QuoteSection__content--left">
             <div className="QuoteBox">
+              {loaderState && <BlurredSpinner />}
               <div className="QuoteBox__row">
                 <label data-mandatory htmlFor="fromBusiness">
-                  From Business
+                  Source
                 </label>
                 <Select
                   id="fromBusiness"
@@ -187,7 +190,7 @@ export default function Home({ user }) {
               </div>
               <div className="QuoteBox__row">
                 <label data-mandatory htmlFor="toBusiness">
-                  To Business
+                  Destination
                 </label>
                 <Select
                   id="toBusiness"
@@ -251,7 +254,8 @@ export default function Home({ user }) {
                     <h2>
                       {Math.round(
                         (fetchedQuote.distance / 1000 + Number.EPSILON) * 100
-                      ) / 100}km
+                      ) / 100}
+                      km
                     </h2>
                   </div>
                   <div className="QuoteBox__row">
@@ -266,7 +270,7 @@ export default function Home({ user }) {
                     width: "100%",
                   }}
                   onClick={async () => {
-                    console.log(quoteData);
+                    setLoaderState(true);
                     await Fetcher(
                       `http://34.131.53.208/predict?quantity=${quoteData.noOfUnits}&volume=${quoteData.volume}&lat1=${quoteData.origin[0]}&lng1=${quoteData.origin[1]}&lat2=${quoteData.destination[0]}&lng2=${quoteData.destination[1]}`,
                       {
@@ -277,6 +281,7 @@ export default function Home({ user }) {
                         cost: res.freight_cost,
                         distance: res.distance,
                       });
+                      setLoaderState(false);
                     });
                   }}
                 >

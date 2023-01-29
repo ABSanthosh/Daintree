@@ -10,6 +10,7 @@ import Fetcher from "../../utils/Fetcher";
 import SkuOrderInput from "../../components/SKU/SkuOrderInput/SkuOrderInput";
 import { Cashify } from "../../utils/Cashify";
 import Countries from "../../utils/countries.json";
+import BlurredSpinner from "../../components/BlurredSpinner/BlurredSpinner";
 
 export async function getServerSideProps(context) {
   if (context.req.session.user === undefined) {
@@ -46,6 +47,8 @@ export default function Orders({ user, businesses, orders }) {
   const [fromTempBusinessProducts, setFromTempBusinessProducts] = useState([]);
 
   const [fetchedQuote, setFetchedQuote] = useState(null);
+
+  const [fetchLoadState, setFetchLoadState] = useState(false)
 
   const [newOrderDetails, setNewOrderDetails] = useState({
     id: "",
@@ -117,6 +120,7 @@ export default function Orders({ user, businesses, orders }) {
         }}
       >
         <div className="OrderPane">
+          {fetchLoadState && <BlurredSpinner />}
           <h1>Order {newOrderDetails.id}</h1>
           <div className="OrderPane__content">
             <div className="OrderPane__row">
@@ -348,6 +352,7 @@ export default function Orders({ user, businesses, orders }) {
                     !newOrderDetails.toBusinessWarehouse
                   }
                   onClick={async () => {
+                    setFetchLoadState(true)
                     const fromCountry = fromBusinessWarehouse.find(
                       (warehouse) =>
                         warehouse.id === newOrderDetails.fromBusinessWarehouse
@@ -384,6 +389,7 @@ export default function Orders({ user, businesses, orders }) {
                         cost: res.freight_cost,
                         distance: res.distance,
                       });
+                      setFetchLoadState(false)
                     });
                   }}
                 >
