@@ -379,12 +379,20 @@ export default function Orders({ user, businesses, orders }) {
                       volume: newOrderDetails.selectedProducts.length * 10,
                     };
 
-                    await Fetcher(
-                      `http://34.131.53.208/predict?quantity=${quoteData.noOfUnits}&volume=${quoteData.volume}&lat1=${quoteData.origin[0]}&lng1=${quoteData.origin[1]}&lat2=${quoteData.destination[0]}&lng2=${quoteData.destination[1]}`,
-                      {
-                        method: "GET",
-                      }
-                    ).then((res) => {
+                    // await Fetcher(
+                    //   `http://34.131.53.208/predict?quantity=${quoteData.noOfUnits}&volume=${quoteData.volume}&lat1=${quoteData.origin[0]}&lng1=${quoteData.origin[1]}&lat2=${quoteData.destination[0]}&lng2=${quoteData.destination[1]}`,
+                    //   {
+                    //     method: "GET",
+                    //   }
+                    // )
+
+                    await Fetcher("/api/misc/ml", {
+                      method: "POST",
+                      body: {
+                        queryString: `quantity=${quoteData.noOfUnits}&volume=${quoteData.volume}&lat1=${quoteData.origin[0]}&lng1=${quoteData.origin[1]}&lat2=${quoteData.destination[0]}&lng2=${quoteData.destination[1]}`,
+                      },
+                    })
+                    .then((res) => {
                       setFetchedQuote({
                         cost: res.freight_cost,
                         distance: res.distance,
